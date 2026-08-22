@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA | Aesthetic Home Decor & Lifestyle</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==================== GLOBAL STYLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg-color: #FAF8F5;
+            --card-bg: #FFFFFF;
+            --text-main: #111116;
+            --text-muted: #666666;
+            --accent: #E07A5F;
+            --accent-pink: #D81B60;
+            --accent-soft: #F4F1DE;
+            --font-heading: 'Playfair Display', serif;
+            --border-color: #EAE3D9;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header / Navbar */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(250, 248, 245, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 100;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .brand-logo {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            margin-left: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+
+        /* Hero Banner */
+        .hero {
+            padding: 90px 8% 50px 8%;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero span {
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--accent);
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 52px;
+            font-weight: 500;
+            margin: 10px 0 20px 0;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 30px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Category Filter Tabs */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+            padding: 0 8%;
+        }
+
+        .cat-btn {
+            background: #EAE3D9;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background: var(--text-main);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Pinterest Grid Layout */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 8% 60px 8%;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .img-container {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .product-card:hover .img-container img {
+            transform: scale(1.08);
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+
+        .card-details {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-details h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-details p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .buy-btn {
+            display: block;
+            text-align: center;
+            background: var(--text-main);
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* Dedicated Quote Section */
+        .quote-section {
+            padding: 40px 8% 80px 8%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .quote-card {
+            background: #FFFFFF;
+            border: 1px solid #EAE3D9;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .quote-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-pink);
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .card-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .quote-box {
+            font-style: italic;
+            color: #2B2B36;
+            font-size: 17px;
+            line-height: 1.6;
+            margin: 15px 0 30px 0;
+            min-height: 60px;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+        }
+
+        .action-btn-secondary {
+            background: var(--text-main);
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .action-btn-secondary:hover {
+            background: var(--accent-pink);
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #F0EAE1;
+            padding: 60px 8% 40px 8%;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer h2 {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: #888888;
+            margin-top: 30px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 38px; }
+            header { padding: 15px 5%; }
+            .product-grid, .categories, .quote-section { padding-left: 5%; padding-right: 5%; }
+            .quote-card { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="#" class="brand-logo">AURA</a>
+        <nav>
+            <a href="#" class="active">Trending Pins</a>
+            <a href="#products">Categories</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span>Curated Aesthetic Finds</span>
+        <h1>Elevate Your Daily Living Space</h1>
+        <p>Discover handpicked minimalist home decor, clever kitchen gadgets, and essential beauty products straight from our Pinterest collection.</p>
+    </section>
+
+    <!-- Category Filter -->
+    <div class="categories" id="products">
+        <button class="cat-btn active" onclick="filterCategory('all', event)">All Products</button>
+        <button class="cat-btn" onclick="filterCategory('decor', event)">Home Decor</button>
+        <button class="cat-btn" onclick="filterCategory('kitchen', event)">Kitchen Gadgets</button>
+        <button class="cat-btn" onclick="filterCategory('cosmetics', event)">Cosmetics & Beauty</button>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid" id="grid">
+        <!-- Card 1: Decor -->
+        <div class="product-card" data-category="decor">
+            <div class="img-container">
+                <span class="badge">Decor</span>
+                <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=600&auto=format&fit=crop" alt="Minimalist Vase">
+            </div>
+            <div class="card-details">
+                <h3>Nordic Ceramic Vase</h3>
+                <p>Minimalist doughnut-shaped ceramic vase perfect for dried pampas grass and modern living room aesthetic.</p>
+                <a href="YOUR_AFFILIATE_LINK_HERE" target="_blank" class="buy-btn">Check Price / View Product ↗</a>
+            </div>
+        </div>
+
+        <!-- Card 2: Kitchen -->
+        <div class="product-card" data-category="kitchen">
+            <div class="img-container">
+                <span class="badge">Kitchen</span>
+                <img src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?q=80&w=600&auto=format&fit=crop" alt="Smart Drink Dispenser">
+            </div>
+            <div class="card-details">
+                <h3>Automatic Beverage Dispenser</h3>
+                <p>Smart, leak-proof electric dispenser for milk, juice, and daily drinks. Aesthetic and kid-friendly.</p>
+                <a href="YOUR_AFFILIATE_LINK_HERE" target="_blank" class="buy-btn">Check Price / View Product ↗</a>
+            </div>
+        </div>
+
+        <!-- Card 3: Cosmetics -->
+        <div class="product-card" data-category="cosmetics">
+            <div class="img-container">
+                <span class="badge">Beauty</span>
+                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=600&auto=format&fit=crop" alt="Organic Skincare Set">
+            </div>
+            <div class="card-details">
+                <h3>Glow Serum & Skincare Kit</h3>
+                <p>Hydrating and lightweight serum formulation for healthy, radiant skin. Cruelty-free ingredients.</p>
+                <a href="YOUR_AFFILIATE_LINK_HERE" target="_blank" class="buy-btn">Check Price / View Product ↗</a>
+            </div>
+        </div>
+
+        <!-- Card 4: Decor -->
+        <div class="product-card" data-category="decor">
+            <div class="img-container">
+                <span class="badge">Decor</span>
+                <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=600&auto=format&fit=crop" alt="Warm Ambient Lamp">
+            </div>
+            <div class="card-details">
+                <h3>Sunset Glow Ambient Light</h3>
+                <p>Create cozy aesthetic vibes for your bedroom or photo shoot corner with warm projection lighting.</p>
+                <a href="YOUR_AFFILIATE_LINK_HERE" target="_blank" class="buy-btn">Check Price / View Product ↗</a>
+            </div>
+        </div>
+
+        <!-- Card 5: Kitchen -->
+        <div class="product-card" data-category="kitchen">
+            <div class="img-container">
+                <span class="badge">Kitchen</span>
+                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=600&auto=format&fit=crop" alt="Aesthetic Spice Jars">
+            </div>
+            <div class="card-details">
+                <h3>Glass Spice Jar Organizer Set</h3>
+                <p>Bamboo lid glass jars with pre-printed minimalist waterproof labels to organize your kitchen counter.</p>
+                <a href="YOUR_AFFILIATE_LINK_HERE" target="_blank" class="buy-btn">Check Price / View Product ↗</a>
+            </div>
+        </div>
+
+        <!-- Card 6: Cosmetics -->
+        <div class="product-card" data-category="cosmetics">
+            <div class="img-container">
+                <span class="badge">Beauty</span>
+                <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600&auto=format&fit=crop" alt="Nude Lip Palette">
+            </div>
+            <div class="card-details">
+                <h3>Velvet Matte Lip Tint Set</h3>
+                <p>Long-lasting, non-drying nude shade collection designed for everyday aesthetic and natural looks.</p>
+                <a href="YOUR_AFFILIATE_LINK_HERE" target="_blank" class="buy-btn">Check Price / View Product ↗</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quote Card Section -->
+    <section class="quote-section">
+        <div class="quote-card">
+            <div>
+                <span class="card-tag">INSPIRATION ENGINE</span>
+                <h2 class="card-title">Daily Aesthetic Quote</h2>
+                <div class="quote-box" id="quote-display">"Aesthetics is the mother of ethics." — Joseph Brodsky</div>
+            </div>
+            <div>
+                <button class="action-btn-secondary" onclick="generateQuote()">Generate New Quote ✨</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h2>AURA</h2>
+        <p>Curating aesthetic finds for home, kitchen, and beauty.</p>
+        <p class="copyright">&copy; 2026 AURA. All rights reserved.</p>
+    </footer>
+
+    <!-- Filter & Quote Scripts -->
+    <script>
+        function filterCategory(category, e) {
+            // Update active button state
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (e) e.target.classList.add('active');
+
+            // Filter items
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        const quotes = [
+            '"Simplicity is the ultimate sophistication." — Leonardo da Vinci',
+            '"Design is intelligence made visible." — Alina Wheeler',
+            '"Elegance is not standing out, but being remembered." — Giorgio Armani',
+            '"Detail is not a detail. It makes the design." — Charles Eames',
+            '"Less is more." — Ludwig Mies van der Rohe',
+            '"Aesthetics is the mother of ethics." — Joseph Brodsky',
+            '"Creativity is intelligence having fun." — Albert Einstein'
+        ];
+
+        function generateQuote() {
+            const quoteDisplay = document.getElementById('quote-display');
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            
+            quoteDisplay.style.opacity = '0';
+            
+            setTimeout(() => {
+                quoteDisplay.innerText = quotes[randomIndex];
+                quoteDisplay.style.opacity = '1';
+            }, 250);
+        }
+    </script>
+
+</body>
+</html>
